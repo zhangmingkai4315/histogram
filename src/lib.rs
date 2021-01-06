@@ -9,6 +9,8 @@ struct Bin{
     count: usize,
 }
 
+/// A Histogram struct include a double linklist and some attributes for manage data.
+/// using linkedList for fast insert and merge items in a sorted data structure
 pub struct Histogram{
     bins: LinkedList<Bin>,
     max_bins: usize,
