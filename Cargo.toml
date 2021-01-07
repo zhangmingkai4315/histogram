@@ -5,7 +5,7 @@ authors = ["mike zhang <zhangmingkai19892013@gmail.com>"]
 edition = "2018"
 readme = "README.md"
 repository = "https://github.com/zhangmingkai4315/histogram"
-keywords = ["histogram", "linked-list","statistic","quantile","cumulative distribution","variance"]
+keywords = ["histogram", "linked-list","statistic","quantile","cumulative","distribution","variance"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
