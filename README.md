@@ -12,6 +12,6 @@ Processor: 2.3 GHz 4 Intel Core i5
 Memory   : 16 GB 2133 MHz LPDDR3
 ```
 As the benchmark result list below, if you set the bucket size to 50,the average time cost
-for each add operation will cost 500ns (2,000,000 op/s)
+for each add operation will cost 400-500ns ( >2,000,000 op/s).
 
 ![Image](./images/DBAA8A16-FBC7-4CE6-9C53-B2E90FBF2389.jpg)
