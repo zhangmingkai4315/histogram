@@ -265,13 +265,13 @@ impl Histogram {
 #[allow(dead_code)]
 #[derive(Debug)]
 pub struct HistogramReport {
-    total: u64,
-    mean: f64,
-    max: f64,
-    min: f64,
-    percent99: f64,
-    percent90: f64,
-    percent50: f64,
+    pub total: u64,
+    pub mean: f64,
+    pub max: f64,
+    pub min: f64,
+    pub percent99: f64,
+    pub percent90: f64,
+    pub percent50: f64,
 }
 
 #[allow(dead_code)]
