@@ -13,3 +13,10 @@ license = "MIT"
 [dependencies]
 linked-list = "0.0.3"
 rand = "0.5"
+
+[dev-dependencies]
+criterion = "0.3"
+
+[[bench]]
+name = "benchmark"
+harness = false
