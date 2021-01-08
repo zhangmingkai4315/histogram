@@ -11,6 +11,7 @@ struct Bin {
 
 /// A Histogram struct include a double linklist and some attributes for manage data.
 /// using linkedList for fast insert and merge items in a sorted data structure
+#[derive(Debug)]
 pub struct Histogram {
     bins: LinkedList<Bin>,
     max_bins: usize,
@@ -32,7 +33,7 @@ impl Histogram {
     /// # Examples
     ///
     /// ```
-    ///  use crate::histogram::Histogram;
+    ///  use crate::stream_histogram::Histogram;
     ///  let mut histogram = Histogram::new(20);
     ///  for i in 1..=100000 {
     ///       histogram.add(i as f64);
@@ -59,15 +60,14 @@ impl Histogram {
     /// # Examples
     ///
     /// ```
-    ///  use crate::histogram::Histogram;
+    ///  use crate::stream_histogram::Histogram;
     ///  let mut histogram = Histogram::new(20);
     ///  for i in 1..=100000 {
     ///       histogram.add(i as f64);
     ///  }
     /// ```
     pub fn add(&mut self, number: f64) {
-        self.total += 1;
-
+        self.total = self.total + 1;
         match self.min {
             Some(v) => {
                 if number < v {
@@ -88,6 +88,7 @@ impl Histogram {
                 self.max = Some(number);
             }
         }
+        // println!(" {}{:?}{:?}", self.total, self.max, self.min);
         let mut cursor = self.bins.cursor();
         loop {
             match cursor.next() {
@@ -123,6 +124,7 @@ impl Histogram {
     /// q-quantiles are values that partition a finite set of values into q subsets of
     /// (nearly) equal sizes. for more detail please check
     /// [wikipedia](https://en.wikipedia.org/wiki/Quantile)
+    #[allow(dead_code)]
     pub fn quantile(&self, q: f64) -> Option<f64> {
         let mut count = q * self.total as f64;
         for i in self.bins.iter() {
@@ -136,6 +138,7 @@ impl Histogram {
     }
     /// Cumulative distribution function(aka: cdf) returns the value of the cumulative
     /// distribution at value x. for more detail, please check [wikipedia](https://en.wikipedia.org/wiki/Cumulative_distribution_function)
+    #[allow(dead_code)]
     pub fn cdf(&mut self, x: f64) -> Option<f64> {
         let mut count = 0;
         for i in self.bins.iter() {
@@ -160,7 +163,7 @@ impl Histogram {
         }
         Some(sum / self.total as f64)
     }
-
+    #[allow(dead_code)]
     pub fn variance(&self) -> Option<f64> {
         if self.total == 0 {
             return None;
@@ -224,7 +227,7 @@ impl Histogram {
     ///
     /// ```
     ///  use rand::distributions::{Normal, Distribution};
-    ///  use crate::histogram::Histogram;
+    ///  use crate::stream_histogram::Histogram;
     ///  let normal = Normal::new(10.0, 10.0);
     ///  let mut histogram = Histogram::new(20);
     ///  for _i in 1..=100000 {
@@ -249,7 +252,7 @@ impl Histogram {
     /// return a report from current histogram
     /// # Example
     /// ```
-    /// use crate::histogram::Histogram;
+    /// use crate::stream_histogram::Histogram;
     /// let mut histogram = Histogram::new(10);
     /// for i in 1..=100 {
     ///     histogram.add(i as f64);
@@ -263,7 +266,7 @@ impl Histogram {
     }
 }
 #[allow(dead_code)]
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct HistogramReport {
     pub total: u64,
     pub mean: f64,
@@ -293,7 +296,6 @@ impl HistogramReport {
 mod tests {
     use super::Histogram;
     use crate::HistogramReport;
-    use rand::distributions::{Distribution, Normal};
 
     #[test]
     fn test_histogram() {
